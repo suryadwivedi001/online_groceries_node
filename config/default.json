@@ -1,12 +1,11 @@
 {
-    "dbConfig": {
-        "host":"localhost",
-        "user":"root",
-        "password":"",
-        "database":"groceries",
-        "multipleStatements": true,
-        "timezone":"utc+5:30",
-        "charset":"utf8mb4",
-        "image_base_url" : "http://192.168.1.13:3001/img/"
-    }
+  "dbConfig": {
+    "host": "sql202.infinityfree.com",
+    "user": "if0_39574132",
+    "password": "dLw8NTkOLV54xoE",
+    "database": "if0_39574132_groceries",
+    "multipleStatements": true,
+    "timezone": "utc+5:30",
+    "charset": "utf8mb4"
+  }
 }
