@@ -1,15 +1,19 @@
+require('dotenv').config();
+const config = require('config');
 var moment = require('moment-timezone');
 var fs = require('fs');
 const { format } = require('path');
 
 const app_debug_mode = true;
 const timezone_name = "Asia/Kolkata";
-const msg_server_internal_error = "Server Internal Error"
+const msg_server_internal_error = "Server Internal Error";
 
 module.exports = {
+    
 
     ImagePath: () => {
-        return "http://localhost:3001/img/";
+        
+        return "http://192.168.1.13:3001/img/";
     },
 
     ThrowHtmlError: (err, res) => {

@@ -6,6 +6,7 @@
         "database":"groceries",
         "multipleStatements": true,
         "timezone":"utc+5:30",
-        "charset":"utf8mb4"
+        "charset":"utf8mb4",
+        "image_base_url" : "http://192.168.1.13:3001/img/"
     }
 }
