@@ -1,13 +1,11 @@
 {
-  "dbConfig": {
-    "host": "mysql.railway.internal",
-    "user": "root",
-    "password": "FealubGAXcooNnkgpMKonCqnzhwsCWBP",
-    "database": "railway",
-    "port": 3306,
-    "multipleStatements": true,
-    "timezone": "utc+5:30",
-    "charset": "utf8mb4"
-  }
+    "dbConfig": {
+        "host":"localhost",
+        "user":"root",
+        "password":"",
+        "database":"groceries",
+        "multipleStatements": true,
+        "timezone":"utc+5:30",
+        "charset":"utf8mb4"
+    }
 }
-

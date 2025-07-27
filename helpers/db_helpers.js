@@ -38,7 +38,7 @@ const dbConfig = {
   host: getConfigValue('DB_HOST', 'dbConfig.host', 'localhost'),
   user: getConfigValue('DB_USER', 'dbConfig.user', 'root'),
   password: getConfigValue('DB_PASS', 'dbConfig.password', ''),
-  database: getConfigValue('DB_NAME', 'dbConfig.database', 'groceries'),
+  database: getConfigValue('DB_NAME', 'dbConfig.database', 'railway'),
   port: parseInt(getConfigValue('DB_PORT', 'dbConfig.port', '3306'), 10),
   multipleStatements: true,
   timezone: getConfigValue('DB_TIMEZONE', 'dbConfig.timezone', 'utc+5:30'),
