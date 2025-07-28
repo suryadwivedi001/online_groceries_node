@@ -1,15 +1,15 @@
-# Ultimate Online railway Shop App Node.js Express Js REST Api With MySQL & Socket.io - Shop Smart, Save Time 
+# Ultimate Online groceries Shop App Node.js Express Js REST Api With MySQL & Socket.io - Shop Smart, Save Time 
 
 # codeforany @codeforany
 
 - [Youtube Channel: @codeforany](https://www.youtube.com/channel/UCdQTp9wRK5vAOlEQZf9PHSg)
 - [Youtube Channel Subscribe: @codeforany](https://www.youtube.com/channel/UCdQTp9wRK5vAOlEQZf9PHSg?sub_confirmation=1)
 
-Welcome to this comprehensive tutorial where we'll build an efficient and user-friendly Online railway Shop App called "Shop Smart, Save Time." In this tutorial, we'll cover everything you need to know about developing the backend of the app using Node.js, Express.js, MySQL, and Socket.io. With this powerful combination, we'll create a robust REST API to handle user interactions and real-time updates, making the shopping experience seamless and engaging.
+Welcome to this comprehensive tutorial where we'll build an efficient and user-friendly Online groceries Shop App called "Shop Smart, Save Time." In this tutorial, we'll cover everything you need to know about developing the backend of the app using Node.js, Express.js, MySQL, and Socket.io. With this powerful combination, we'll create a robust REST API to handle user interactions and real-time updates, making the shopping experience seamless and engaging.
 
 ⚙️ Technologies used: Node.js, Express.js, MySQL, Socket.io
 
-🚀 Key Features of the Online railway Shop App:
+🚀 Key Features of the Online groceries Shop App:
 
 User Registration & Authentication: Create an account and securely log in.
 Browse Grocery Products: Explore a wide range of grocery items with detailed information.
@@ -17,7 +17,7 @@ Add to Cart & Checkout: Easily add items to your cart and proceed to checkout.
 Real-Time Updates: Stay informed with real-time order status and updates.
 Secure Payment: Make hassle-free and secure payments.
 Order Tracking: Track your orders for better convenience.
-🔥 Follow this step-by-step tutorial to learn how to develop the backend of the Online railway Shop App. Whether you're a beginner or an experienced developer, this tutorial will guide you through building a powerful and scalable REST API with Node.js, Express.js, MySQL, and Socket.io.
+🔥 Follow this step-by-step tutorial to learn how to develop the backend of the Online groceries Shop App. Whether you're a beginner or an experienced developer, this tutorial will guide you through building a powerful and scalable REST API with Node.js, Express.js, MySQL, and Socket.io.
 
 👍 Don't forget to like the video, subscribe to the channel, and hit the notification bell to stay updated on more exciting tutorials.
 
@@ -25,9 +25,9 @@ Order Tracking: Track your orders for better convenience.
 
 - [Youtube Full Playlist: Online Grocery Shopping Node REST Api Playlist](https://www.youtube.com/playlist?list=PLzcRC7PA0xWQiIgIL526ZAxxVdSZMwx3l)
 
-- [Youtube Video - 1: Online railway Shop App Database And Table Create, Login Api & SignUp Api ](https://youtu.be/d61iFh0mTBI)
-- [Youtube Video - 2: Online railway Shop App Product Management & Admin APIs ](https://youtu.be/V5y4Km9890c)
-- [Youtube Video - 3: Build an Online railway Shop App | Node.js Express REST API | Product Management & Admin APIs ](https://youtu.be/9CUk-CJC9Uc)
+- [Youtube Video - 1: Online groceries Shop App Database And Table Create, Login Api & SignUp Api ](https://youtu.be/d61iFh0mTBI)
+- [Youtube Video - 2: Online groceries Shop App Product Management & Admin APIs ](https://youtu.be/V5y4Km9890c)
+- [Youtube Video - 3: Build an Online groceries Shop App | Node.js Express REST API | Product Management & Admin APIs ](https://youtu.be/9CUk-CJC9Uc)
 - [Youtube Video - 4: Zone/Area Management APIs ](https://youtu.be/ifAlKg9p4Wk)
 - [Youtube Video - 5: Admin APIs Product Offer Api & App APIs Home Screen , Product Details Api ](https://youtu.be/1mEsFL_G6ZI)
 - [Youtube Video - 6: App APIs Favorite Operations & Explore Screen APIs ](https://youtu.be/y3XPzlkwAu4)
@@ -46,7 +46,7 @@ Order Tracking: Track your orders for better convenience.
 - [Youtube Video - 2: Socket Connection & Socket Emit & Event On Listen Api With Flutter Mobile App ](https://youtu.be/FWKYqs-eaAE)
 - [Youtube Video - 3: Node Express Create Multipart/Form-Data Api With Multiple Image Upload Api ](https://youtu.be/ec2_v1zXbiQ)
 
-## Ultimate Online railway Shop App Convent Into Flutter - Shop Smart, Save Time
+## Ultimate Online groceries Shop App Convent Into Flutter - Shop Smart, Save Time
 - [Youtube Full Playlist: Online Grocery Shopping Flutter Code Playlist](https://www.youtube.com/playlist?list=PLzcRC7PA0xWR2TZ4f34X8Q_fvdwwRvm9I)
 - [Youtube Video Part-1: App Induction, Welcome UI](https://youtu.be/1oV3BCOmOyE)
 - [Youtube Video Part-2: Sign Up, Sign In, Select Location & Verification ](https://youtu.be/0A9q0olE99w)

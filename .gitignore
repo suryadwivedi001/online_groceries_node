@@ -119,8 +119,6 @@ dist
 # TernJS port file
 .tern-port
 
-.config/default.json
-
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
