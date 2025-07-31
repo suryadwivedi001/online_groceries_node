@@ -13,7 +13,7 @@ module.exports = {
 
     ImagePath: () => {
         
-        return "http://192.168.1.13:3001/img/";
+        return "http://20.244.12.224:3001/img/";
     },
 
     ThrowHtmlError: (err, res) => {
