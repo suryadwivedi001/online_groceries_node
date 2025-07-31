@@ -141,55 +141,57 @@ module.exports.controller = (app, io, socket_list) => {
         var reqObj = req.body;
         checkAccessToken(req.headers, res, (uObj) => {
 
-            db.query("SELECT `od`.`price` as `offer_price`, `od`.`start_date`, `od`.`end_date`, `pd`.`prod_id`, `pd`.`cat_id`, `pd`.`brand_id`, `pd`.`type_id`, `pd`.`name`, `pd`.`detail`, `pd`.`unit_name`, `pd`.`unit_value`, `pd`.`nutrition_weight`, `pd`.`price`,(CASE WHEN `imd`.`image` != '' THEN  CONCAT( '" + image_base_url + "' ,'', `imd`.`image` ) ELSE '' END) AS `image`  , `cd`.`cat_name`,  `td`.`type_name`, ( CASE WHEN `fd`.`fav_id` IS NOT NULL THEN 1 ELSE 0 END ) AS `is_fav`, AVG( CASE WHEN `rd`.`rate` IS NOT NULL THEN `rd`.`rate` ELSE 0 END ) AS `avg_rating` FROM `offer_detail` AS `od` " +
-                "INNER JOIN `product_detail` AS `pd` ON `pd`.`prod_id` = `od`.`prod_id` AND `pd`.`status` = ? " +
-                "INNER JOIN `image_detail` AS `imd` ON `pd`.`prod_id` = `imd`.`prod_id` AND `imd`.`status` = 1 " +
-                "INNER JOIN `category_detail` AS `cd` ON `cd`.`cat_id` = `pd`.`cat_id` AND `cd`.`status` = 1 " +
-                "LEFT JOIN  `favorite_detail` AS `fd` ON  `pd`.`prod_id` = `fd`.`prod_id` AND `fd`.`user_id` = ? AND `fd`.`status`=  1 " +
-                "LEFT JOIN `review_detail` AS `rd` ON `rd`.`prod_id` = `pd`.`prod_id` " +
-                "INNER JOIN `type_detail` AS `td` ON `pd`.`type_id` = `td`.`type_id` AND `td`.`status` = 1 " +
-                "WHERE `od`.`status` = ? AND `od`.`start_date` <= NOW() AND `od`.`end_date` >= NOW() GROUP BY `pd`.`prod_id` ;" +
+            const sql = `
+                SELECT 
+                    pd.prod_id,
+                    pd.cat_id,
+                    pd.brand_id,
+                    pd.type_id,
+                    pd.name,
+                    pd.detail,
+                    pd.unit_name,
+                    pd.unit_value,
+                    pd.nutrition_weight,
+                    pd.price,
+                    (CASE WHEN imd.image != '' THEN CONCAT(?, '', imd.image) ELSE '' END) AS image,
+                    cd.cat_name,
+                    td.type_name,
+                    (CASE WHEN fd.fav_id IS NOT NULL THEN 1 ELSE 0 END) AS is_fav,
+                    IFNULL(AVG(CASE WHEN rd.rate IS NOT NULL THEN rd.rate ELSE 0 END), 0) AS avg_rating,
+                    -- Offer flag and price
+                    (CASE WHEN od.prod_id IS NOT NULL AND od.status = 1 AND od.start_date <= NOW() AND od.end_date >= NOW() THEN 1 ELSE 0 END) AS is_offer,
+                    od.price AS offer_price,
+                    0 AS is_best_seller  -- no best_sell_list table, so default 0
+                FROM product_detail pd
+                    LEFT JOIN offer_detail od ON pd.prod_id = od.prod_id
+                    LEFT JOIN favorite_detail fd ON pd.prod_id = fd.prod_id AND fd.user_id = ? AND fd.status = 1
+                    INNER JOIN image_detail imd ON pd.prod_id = imd.prod_id AND imd.status = 1
+                    INNER JOIN category_detail cd ON cd.cat_id = pd.cat_id AND cd.status = 1
+                    INNER JOIN type_detail td ON pd.type_id = td.type_id AND td.status = 1
+                    LEFT JOIN review_detail rd ON rd.prod_id = pd.prod_id
+                WHERE pd.status = 1
+                GROUP BY pd.prod_id
+                ORDER BY pd.prod_id DESC;
+            `;
 
-                "SELECT `pd`.`prod_id`, `pd`.`cat_id`, `pd`.`brand_id`, `pd`.`type_id`, `pd`.`name`, `pd`.`detail`, `pd`.`unit_name`, `pd`.`unit_value`, `pd`.`nutrition_weight`, `pd`.`price`, (CASE WHEN `imd`.`image` != '' THEN  CONCAT( '" + image_base_url + "' ,'', `imd`.`image` ) ELSE '' END) AS `image`, `cd`.`cat_name`,  `td`.`type_name`, ( CASE WHEN `fd`.`fav_id` IS NOT NULL THEN 1 ELSE 0 END ) AS `is_fav`, AVG( CASE WHEN `rd`.`rate` IS NOT NULL THEN `rd`.`rate` ELSE 0 END ) AS `avg_rating` FROM  `product_detail` AS `pd` " +
-                "LEFT JOIN  `favorite_detail` AS `fd` ON  `pd`.`prod_id` = `fd`.`prod_id` AND `fd`.`user_id` = ? AND `fd`.`status`=  1 " +
-                "INNER JOIN `image_detail` AS `imd` ON `pd`.`prod_id` = `imd`.`prod_id` AND `imd`.`status` = 1 " +
-                "INNER JOIN `category_detail` AS `cd` ON `cd`.`cat_id` = `pd`.`cat_id` AND `cd`.`status` = 1 " +
-                "LEFT JOIN `review_detail` AS `rd` ON `rd`.`prod_id` = `pd`.`prod_id` " +
-                "INNER JOIN `type_detail` AS `td` ON `pd`.`type_id` = `td`.`type_id` AND `td`.`status` = 1 " +
-                "WHERE `pd`.`status` = ? AND `pd`.`cat_id` = ? GROUP BY `pd`.`prod_id` ;" +
-
-                "SELECT `type_id`, `type_name`, (CASE WHEN `image` != '' THEN  CONCAT( '" + image_base_url + "' ,'', `image` ) ELSE '' END) AS `image` , `color` FROM `type_detail` WHERE `status` = ? ;" +
-
-                "SELECT `pd`.`prod_id`, `pd`.`cat_id`, `pd`.`brand_id`, `pd`.`type_id`, `pd`.`name`, `pd`.`detail`, `pd`.`unit_name`, `pd`.`unit_value`, `pd`.`nutrition_weight`, `pd`.`price`, (CASE WHEN `imd`.`image` != '' THEN  CONCAT( '" + image_base_url + "' ,'', `imd`.`image` ) ELSE '' END) AS `image`, `cd`.`cat_name`,  `td`.`type_name`, ( CASE WHEN `fd`.`fav_id` IS NOT NULL THEN 1 ELSE 0 END ) AS `is_fav`, AVG( CASE WHEN `rd`.`rate` IS NOT NULL THEN `rd`.`rate` ELSE 0 END ) AS `avg_rating`  FROM  `product_detail` AS `pd` " +
-                "LEFT JOIN  `favorite_detail` AS `fd` ON  `pd`.`prod_id` = `fd`.`prod_id` AND `fd`.`user_id` = ? AND `fd`.`status`=  1 " +
-                "INNER JOIN `image_detail` AS `imd` ON `pd`.`prod_id` = `imd`.`prod_id` AND `imd`.`status` = 1 " +
-                "INNER JOIN `category_detail` AS `cd` ON `cd`.`cat_id` = `pd`.`cat_id` AND `cd`.`status` = 1 " +
-                "LEFT JOIN `review_detail` AS `rd` ON `rd`.`prod_id` = `pd`.`prod_id` " +
-                "INNER JOIN `type_detail` AS `td` ON `pd`.`type_id` = `td`.`type_id` AND `td`.`status` = 1 " +
-                "WHERE `pd`.`status` = ? GROUP BY `pd`.`prod_id` ORDER BY `pd`.`prod_id` DESC LIMIT 4 ;", [
-
-                "1", uObj.user_id, "1",
-                uObj.user_id, "1", "1",
-                "1",
-                uObj.user_id, "1"
-            ], (err, result) => {
+            db.query(sql, [image_base_url, uObj.user_id], (err, result) => {
                 if (err) {
+                    console.error("SQL ERROR in /api/app/home:", err);
                     helper.ThrowHtmlError(err, res);
                     return;
                 }
 
                 res.json({
-                    "status": "1", "payload": {
-                        "offer_list": result[0],
-                        "best_sell_list": result[1],
-                        "type_list": result[2],
-                        "list": result[3],
-                    }, "message": msg_success
-                })
-            })
+                    status: "1",
+                    payload: {
+                        product_list: result
+                    },
+                    message: msg_success
+                });
+            });
+        }, "1");
+    });
 
-        }, "1")
-    })
 
     app.post('/api/app/product_detail', (req, res) => {
         helper.Dlog(req.body);
